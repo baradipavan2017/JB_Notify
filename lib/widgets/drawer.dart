@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jb_notify/screens/notes_screen.dart';
 import 'package:jb_notify/screens/prev_questionpapers_screen.dart';
+import 'package:jb_notify/screens/write_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -28,21 +29,21 @@ class AppDrawer extends StatelessWidget {
             ],
           ),
         ),
-        //  const Card(
-        //    child: ListTile(
-        //     leading: Icon(Icons.notifications),
-        //     title: Text(
-        //       'Notifications',
-        //       style: TextStyle(
-        //         fontSize: 16.0,
-        //         fontWeight: FontWeight.w600,
-        //       ),
-        //     ),
-            // onTap: (){
-            //   Navigator.popAndPushNamed(context, routeName)
-            // },
-        // ),
-        //  ),
+          Card(
+           child: ListTile(
+            leading: Icon(Icons.notifications),
+            title: Text(
+              'Send Data',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            onTap: (){
+              Navigator.pushNamed(context, WriteScreen.routeName);
+            },
+        ),
+         ),
         
         ListTile(
           leading: const Icon(Icons.book_online),
