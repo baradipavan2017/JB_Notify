@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-enum Notistatus {
-  general,
-  buses,
-  exams,
-  classes,
-  holidays,
-}
+
 
 class NotificationModel {
   final String id;

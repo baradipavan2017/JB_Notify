@@ -66,23 +66,30 @@ class _WriteScreenState extends State<WriteScreen> {
             SizedBox(
               height: 15.0,
             ),
-            ElevatedButton(
-              onPressed: () {
-                selectFile();
-              },
-              child: Text('select file'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+              children: [
+                Text('Uplood Document'),
+                ElevatedButton(
+                  onPressed: () {
+                    uploadFile();
+                  },
+                  child: Text('Select file'),
+                ),
+              ],
             ),
             Text(
               fileName,
               style: TextStyle(fontSize: 16.0),
             ),
-            ElevatedButton(
-              onPressed: () {
-                uploadFile();
-              },
-              child: Text('Push File'),
-            ),
-            task != null ? buildUploadStatus(task!) : Container(),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     uploadFile();
+            //   },
+            //   child: Text('Push File'),
+            // ),
+            // task != null ? buildUploadStatus(task!) : Container(),
             ElevatedButton(
               onPressed: () async {
                 try {
@@ -108,26 +115,35 @@ class _WriteScreenState extends State<WriteScreen> {
     );
   }
 
-  Future selectFile() async {
-    try {
-      final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-      if (result == null) return;
-      final path = result.files.single.path!;
-      setState(() => file = File(path));
-      print('file selected');
-    } catch (e) {
-      print('erroe $e');
-    }
-  }
+  // Future selectFile() async {
+  //   try {
+  //     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+  //     if (result == null) return;
+  //     final path = result.files.single.path!;
+  //     setState(() => file = File(path));
+  //     print('file selected');
+  //   } catch (e) {
+  //     print('erroe $e');
+  //   }
+  // }
 
   Future uploadFile() async {
     try {
+
+      //selecting a file
+      final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+      if (result == null) return;
+      final path = result.files.single.path!;
+      file = File(path);
+      setState(() => file = File(path));
+
+      //pushing a file to firestore storage
       if (file == null) return;
       final filename = basename(file!.path);
       final destination = 'files/$filename';
 
       task = FirebaseApi.uploadFile(destination: destination, file: file!);
-      setState(() {});
+      //setState(() {});
       // to get the url of the file to download
       if (task == null) return null;
 

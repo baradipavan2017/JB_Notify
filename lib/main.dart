@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jb_notify/screens/write_screen.dart';
 
 import 'screens/navigation_screen.dart';
+import 'screens/new_screen.dart';
 import 'screens/notes_screen.dart';
 import 'screens/parents_screen.dart';
 import 'screens/prev_questionpapers_screen.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             PrevQuestionPaperScreen(),
         NotesScreen.routeName: (context) => NotesScreen(),
         WriteScreen.routeName:(context) => WriteScreen(),
+        NewScreen.routeName:(context) => NewScreen(),
       },
     );
   }

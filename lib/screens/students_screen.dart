@@ -17,7 +17,7 @@ class StudentsScreen extends StatelessWidget {
           ),
           child: ListView.separated(
             itemBuilder: (context, index) {
-              return ListTileFinal(
+              return ListWidget(
                 title: dummy_Notifications[index].title,
                 subtitle: dummy_Notifications[index].subtitle,
                 color: dummy_Notifications[index].color,

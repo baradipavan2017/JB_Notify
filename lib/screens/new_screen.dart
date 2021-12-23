@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jb_notify/data/dummy_data.dart';
 import 'package:jb_notify/models/notices.dart';
+import 'package:jb_notify/widgets/list_tile_final.dart';
 
-
-class ParentsScreen extends StatefulWidget {
-  ParentsScreen({Key? key}) : super(key: key);
-  static const routeName = '/parents_screen';
+class NewScreen extends StatefulWidget {
+  NewScreen({Key? key}) : super(key: key);
+  static const routeName = '/new-screen';
   @override
-  State<ParentsScreen> createState() => _ParentsScreenState();
+  State<NewScreen> createState() => _NewScreenState();
 }
 
-class _ParentsScreenState extends State<ParentsScreen> {
+class _NewScreenState extends State<NewScreen> {
   final dbRef = FirebaseDatabase.instance.reference().child('notices');
 
   //List list = List.empty();
@@ -34,25 +34,23 @@ class _ParentsScreenState extends State<ParentsScreen> {
                 );
               }
               if (snapshot.hasData && !snapshot.hasError) {
-                final listTiles = <ListTile>[];
+                final listTiles = <ListTileFinal>[];
                 final myNotices = Map<String, dynamic>.from(
                     (snapshot.data! as Event).snapshot.value);
-               listTiles.addAll(
-                   myNotices.values.map((value) {
-                     final notices =
-                     Notices.fromRTDB(Map<String, dynamic>.from(value));
-                     return ListTile(
-                       title: Text(notices.title),
-                       subtitle: Text(notices.description),
-                     );
-                   })
-               );
-                return Expanded(
-                    child: ListView(
-                      children: listTiles,
-                    ));
-              }
-              else {
+                listTiles.addAll(myNotices.values.map((value) {
+                  final notices =
+                      Notices.fromRTDB(Map<String, dynamic>.from(value));
+                  return ListTileFinal(
+                      title: notices.title,
+                      subtitle: notices.description,
+                      url: notices.url,
+                      docURL: notices.documentUrl);
+
+                }));
+                return ListView(
+                  children: listTiles,
+                );
+              } else {
                 return Center(child: CircularProgressIndicator());
               }
             },

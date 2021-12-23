@@ -6,14 +6,18 @@ class ListTileFinal extends StatelessWidget {
     Key? key,
     required this.title,
     required this.subtitle,
-    required this.color,
-    required this.dateTime,
+    required this.url,
+    required this.docURL,
+    // required this.color,
+    // required this.dateTime,
   }) : super(key: key);
 
-  final String title;
-  final String subtitle;
-  final Color color;
-  final DateTime dateTime;
+  final String? title;
+  final String? subtitle;
+  final String? url;
+  final String? docURL;
+  // final Color color;
+  // final DateTime dateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -23,30 +27,33 @@ class ListTileFinal extends StatelessWidget {
     // String formattedDate = formatter.format(dateTime);
     // return formattedDate+(" ")+ formattedTime;
     // }
-   String formattedDate = DateFormat().add_yMd().add_jm().format(dateTime);
+  // String formattedDate = DateFormat().add_yMd().add_jm().format(dateTime);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      padding: EdgeInsets.all(15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title,
+            title!,
             style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
-              color: color,
+             // color: color,
             ),
           ),
           SizedBox(height: 6.0),
-          Text(formattedDate),
+          //Text(formattedDate),
           Text(
-            subtitle,
+            subtitle!,
             style: TextStyle(
                 fontSize: 17.0,
                 fontWeight: FontWeight.w600,
                 color: Colors.black),
           ),
+          Text(url!),
+          Text(docURL!),
+
         ],
       ),
     );
